@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-12-10
+
+### ✨ New Features
+- **KvStoreUtil** - Distributed key-value database utility
+  - Cross-device data synchronization
+  - Real-time data change notifications
+  - Secure storage with S1 security level
+  - Auto-sync capabilities
+- **DeviceManager** - Device discovery and management utility
+  - Device discovery and pairing
+  - Device state monitoring (online/offline)
+  - Cross-device ability launching
+  - Secure device authentication
+  - Device list management
+
+### 📚 Documentation
+- Added KvStoreUtil usage examples and API documentation
+- Added DeviceManager usage examples and API documentation
+- Updated project structure in README
+- Updated feature list
+
+---
+
 ## [1.0.0] - 2025-12-10
 
 ### 🎉 Initial Release

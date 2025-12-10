@@ -1,9 +1,9 @@
 # Common Kit - HarmonyOS Utility Library
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](oh-package.json5)
+[![Version](https://img.shields.io/badge/version-1.1.0-green.svg)](oh-package.json5)
 
-A comprehensive utility library for HarmonyOS application development, providing logging, file operations, image processing, permission management, data storage, and more.
+A comprehensive utility library for HarmonyOS application development, providing logging, file operations, image processing, permission management, data storage, distributed KV store, device management, and more.
 
 ## ✨ Features
 
@@ -13,6 +13,8 @@ A comprehensive utility library for HarmonyOS application development, providing
 - 🔐 **Permission Management** - Simplified permission checking and requesting
 - 💾 **Data Storage** - Key-value storage based on Preferences
 - 📷 **Media Helper** - Gallery, camera, and document selection operations
+- 🗄️ **KV Store** - Distributed key-value database with sync capabilities
+- 📱 **Device Manager** - Device discovery, pairing, and distributed ability management
 
 ## 📦 Installation
 
@@ -128,6 +130,60 @@ StringUtil.isNotNullOrEmpty('hello') // true
 const str = StringUtil.arrayBuffer2String(arrayBuffer)
 ```
 
+### KV Store (Distributed Storage)
+
+```typescript
+import { KvStoreUtil } from '@ohos/shared_lib'
+
+const kvStore = new KvStoreUtil()
+
+// Create KV store with change callback
+kvStore.createKvStore(context, (data) => {
+  console.log('Data changed:', data)
+})
+
+// Store data
+kvStore.put('key', 'value')
+
+// Store and sync to specific device
+kvStore.put('key', 'value', deviceId)
+
+// Listen for data changes
+kvStore.setDataChangeListener((data) => {
+  console.log('Data updated:', data)
+})
+
+// Remove listener
+kvStore.removeDataChangeListener()
+```
+
+### Device Manager (Distributed Devices)
+
+```typescript
+import { DeviceManager } from '@ohos/shared_lib'
+
+// Create device manager
+await DeviceManager.createDeviceManager()
+
+// Start device discovery
+DeviceManager.startDeviceDiscovery()
+
+// Get device list from AppStorage
+const deviceList = AppStorage.get('deviceList')
+
+// Authenticate and connect to device
+DeviceManager.authenticateDevice(context, device, sharedList)
+
+// Start remote ability
+DeviceManager.startAbility(context, device, sharedList)
+
+// Stop discovery
+DeviceManager.stopDeviceDiscovery()
+
+// Unbind device
+DeviceManager.unbindDevice(deviceId)
+```
+
 ## 📁 Project Structure
 
 ```
@@ -147,7 +203,9 @@ shared_common_kit/
         ├── FileUtil.ets      # File utility
         ├── ImageUtil.ets     # Image utility
         ├── PermissionUtil.ets # Permission utility
-        └── StringUtil.ets    # String utility
+        ├── StringUtil.ets    # String utility
+        ├── kvStoreUtil.ts    # Distributed KV store
+        └── DeviceManager.ets # Device discovery and management
 ```
 
 ## 🛠️ API Documentation
@@ -208,6 +266,42 @@ String utility class.
 - `static isNullOrEmpty(str: string | null): boolean` - Check if null or empty
 - `static isNotNullOrEmpty(str: string | null): boolean` - Check if not null and not empty
 - `static arrayBuffer2String(buffer: ArrayBuffer): string` - Convert ArrayBuffer to string
+
+### KvStoreUtil
+
+Distributed key-value database utility for cross-device data synchronization.
+
+**Methods:**
+- `createKvStore(context, callback)` - Create distributed KV store
+- `put(key, value, deviceId?)` - Store data with optional device sync
+- `setDataChangeListener(callback)` - Listen for data changes
+- `removeDataChangeListener()` - Remove data change listener
+
+**Features:**
+- Automatic device synchronization
+- Data change notifications
+- Secure storage (S1 level)
+- Auto-sync enabled by default
+
+### DeviceManager
+
+Device discovery and distributed capability management.
+
+**Methods:**
+- `createDeviceManager()` - Initialize device manager
+- `startDeviceDiscovery()` - Start discovering nearby devices
+- `stopDeviceDiscovery()` - Stop device discovery
+- `authenticateDevice(context, device, sharedList)` - Authenticate and bind device
+- `unbindDevice(deviceId)` - Unbind device
+- `startAbility(context, device, sharedList)` - Start remote ability
+- `getBoundDeviceList()` - Get list of bound devices
+
+**Features:**
+- Automatic device state monitoring
+- Device online/offline detection
+- Cross-device ability launching
+- Secure device pairing
+- Device list management via AppStorage
 
 ## 📝 Development Guide
 

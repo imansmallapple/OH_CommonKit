@@ -1,15 +1,17 @@
-// 模型导出
+// Model exports
 export { MediaBean } from './src/main/ets/models/MediaBean'
 
-// 业务辅助类导出
+// Helper exports
 export { MediaHelper } from './src/main/ets/helpers/MediaHelper'
 
-// 存储工具导出
+// Storage exports
 export { PreferenceStorage } from './src/main/ets/storage/PreferenceStorage'
 
-// 工具类导出
+// Utility exports
 export { Logger } from './src/main/ets/utils/Logger'
 export { FileUtil } from './src/main/ets/utils/FileUtil'
 export { ImageUtil } from './src/main/ets/utils/ImageUtil'
 export { PermissionUtil } from './src/main/ets/utils/PermissionUtil'
 export { StringUtil } from './src/main/ets/utils/StringUtil'
+export { default as KvStoreUtil } from './src/main/ets/utils/kvStoreUtil'
+export { default as DeviceManager } from './src/main/ets/utils/DeviceManager'
