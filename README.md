@@ -1,6 +1,6 @@
 # Common Kit - HarmonyOS Utility Library
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](oh-package.json5)
 
 A comprehensive utility library for HarmonyOS application development, providing logging, file operations, image processing, permission management, data storage, and more.
@@ -16,7 +16,7 @@ A comprehensive utility library for HarmonyOS application development, providing
 
 ## 📦 Installation
 
-Add dependency to your HarmonyOS project:
+Add dependency to your HarmonyOS project module `entry/oh-package.json5`:
 
 ```json5
 // oh-package.json5
